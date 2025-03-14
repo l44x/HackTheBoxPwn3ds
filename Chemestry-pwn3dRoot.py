@@ -80,8 +80,8 @@ def register_user_and_exploti_www():
     r = s.get(main_url)
 
     post_data={
-        'username': '1111',
-        'password': '1111'
+        'username': 'matias',
+        'password': 'matias'
     }
     # Creathed User - Exploit
     r = s.post(main_url, data=post_data)
